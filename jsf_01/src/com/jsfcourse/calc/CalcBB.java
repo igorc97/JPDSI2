@@ -13,9 +13,9 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 //@SessionScoped
 public class CalcBB {
-	private String kwota;
-	private String lata;
-	private String procent;
+	private Double kwota;
+	private Double lata;
+	private Double procent;
 	private Double result;
 	private Double secres;
 
@@ -24,27 +24,27 @@ public class CalcBB {
 
 	
 
-	public String getKwota() {
+	public Double getKwota() {
 		return kwota;
 	}
 
-	public void setKwota(String kwota) {
+	public void setKwota(Double kwota) {
 		this.kwota = kwota;
 	}
 
-	public String getLata() {
+	public Double getLata() {
 		return lata;
 	}
 
-	public void setLata(String lata) {
+	public void setLata(Double lata) {
 		this.lata = lata;
 	}
 
-	public String getProcent() {
+	public Double getProcent() {
 		return procent;
 	}
 
-	public void setProcent(String procent) {
+	public void setProcent(Double procent) {
 		this.procent = procent;
 	}
 
@@ -66,9 +66,6 @@ public class CalcBB {
 
 	public boolean doTheMath() {
 		try {
-			double kwota = Double.parseDouble(this.kwota);
-			double lata = Double.parseDouble(this.lata);
-			double procent = Double.parseDouble(this.procent);
 			double KwotaOproc = kwota * procent;
 			result = (kwota/(lata * 12) + KwotaOproc); //kwota po wyliczeniach + kwota oprocentowania
 			secres = (kwota/(lata * 12)); //kwota po wyliczeniach bez kwoty oprocentowania

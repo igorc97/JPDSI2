@@ -9,30 +9,35 @@
 	<title>Kredyt</title>
 </h:head>
 <h:body>
-
+<p:panel header="Kalkulator kredytowy" taggleable="true" closable="true">
 	<h1>Kredyt</h1>
 
 	<h:form id="bla">
-		<p:inputSwitch value="#{bean.propertyName}"/> --- PL/ENG ---
+	<h:panelGrid id="grid" columns="3" cellpadding="5">
+  		Kwota: <p:inputText value="#{calcBB.kwota}" required="true" requiredMessage="Musisz podać kwote" validatorMessage="Kwota musi wynosić conajmniej 1000" id="kredytkwota" >
+		<f:validateDoubleRange minimum="1000" />
+		</p:inputText>
+		<h:message for="kredytkwota" />
 		<br />
-  		Kwota: <p:inputText value="#{calcBB.kwota}" />
+  		Na ile lat?: <p:inputText value="#{calcBB.lata}" required="true" requiredMessage="Musisz wypełnić to pole" validatorMessage="Okres musi wynosić od 1 roku do 5 lat" id="kredytlata" >
+		<f:validateDoubleRange minimum="1" maximum="5" />
+		</p:inputText>
+		<h:message for="kredytlata" />
 		<br />
-  		Na ile lat?: <p:inputText value="#{calcBB.lata}" />
-		<br />
-		Z jakim procentem?(1% wpisz jako 0.01 itd.): <p:inputText value="#{calcBB.procent}" />
-		<p:messages id="msg" />
-
-		<p:commandButton value="Dodaj" icon="pi pi-star" action="#{calcBB.calc()}"/>
-		<br />
-		<p:commandButton value="Dodaj (AJAX)" icon="pi pi-star" action="#{calcBB.calc_AJAX()}">
-			<f:ajax execute="@form" render="msg" />
-		</p:commandButton>
-		<br />
+		Z jakim procentem?(1% wpisz jako 0.01 itd.): <p:inputText value="#{calcBB.procent}" required="true" requiredMessage="Musisz podać oprocentowanie" validatorMessage="Zakres od 0.01 do 0.4" id="kredytoproc" >
+		<f:validateDoubleRange minimum="0.01" maximum="0.4" />
+		</p:inputText>
+		<h:message for="kredytoproc" />
+		
+		<p:commandButton value="Dodaj" icon="pi pi-star" action="#{calcBB.calc()}" update="@form" />
+		<p:commandButton value="Dodaj (AJAX)" icon="pi pi-star" action="#{calcBB.calc_AJAX()}" update="msg" />
+			
+		</h:panelGrid>
+		<p:growl id="msg" showDetail="true" sticky="true" />
 		<h:commandLink value="Informacje" action="#{calcBB.info()}" />
 		<br />
-		<h1>Dzisiejsza data to:</h1>
-		<p:calendar value="#{dateBean.date}" mode="inline" />
+
 	</h:form>
-		
+	</p:panel>
 </h:body>
 </html>
