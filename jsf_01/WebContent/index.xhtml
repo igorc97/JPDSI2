@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Kredyt</title>
 </h:head>
@@ -12,21 +13,26 @@
 	<h1>Kredyt</h1>
 
 	<h:form id="bla">
-  		Kwota: <h:inputText value="#{calcBB.kwota}" />
+		<p:inputSwitch value="#{bean.propertyName}"/> --- PL/ENG ---
 		<br />
-  		Na ile lat?: <h:inputText value="#{calcBB.lata}" />
+  		Kwota: <p:inputText value="#{calcBB.kwota}" />
 		<br />
-		Z jakim procentem?(1% wpisz jako 0.01 itd.): <h:inputText value="#{calcBB.procent}" />
-		<h:messages id="msg" />
+  		Na ile lat?: <p:inputText value="#{calcBB.lata}" />
+		<br />
+		Z jakim procentem?(1% wpisz jako 0.01 itd.): <p:inputText value="#{calcBB.procent}" />
+		<p:messages id="msg" />
 
-		<h:commandButton value="Dodaj" action="#{calcBB.calc()}"/>
+		<p:commandButton value="Dodaj" icon="pi pi-star" action="#{calcBB.calc()}"/>
 		<br />
-		<h:commandButton value="Dodaj (AJAX)" action="#{calcBB.calc_AJAX()}">
+		<p:commandButton value="Dodaj (AJAX)" icon="pi pi-star" action="#{calcBB.calc_AJAX()}">
 			<f:ajax execute="@form" render="msg" />
-		</h:commandButton>
+		</p:commandButton>
 		<br />
 		<h:commandLink value="Informacje" action="#{calcBB.info()}" />
+		<br />
+		<h1>Dzisiejsza data to:</h1>
+		<p:calendar value="#{dateBean.date}" mode="inline" />
 	</h:form>
-
+		
 </h:body>
 </html>
