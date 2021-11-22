@@ -5,14 +5,13 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>Kredyt</title>
-</h:head>
-<h:body>
-<p:panel header="Kalkulator kredytowy" taggleable="true" closable="true">
-	<h1>Kredyt</h1>
-
-	<h:form id="bla">
+	
+	<ui:composition template="/templates/page-template.xhtml">
+		
+		<ui:define name="pageContent">
+			<p:panel header="Kalkulator kredytowy">
+				<p:messages id="msg" />
+	<h:form>
 	<h:panelGrid id="grid" columns="3" cellpadding="5">
   		Kwota: <p:inputText value="#{calcBB.kwota}" required="true" requiredMessage="Musisz podać kwote" validatorMessage="Kwota musi wynosić conajmniej 1000" id="kredytkwota" >
 		<f:validateDoubleRange minimum="1000" />
@@ -31,13 +30,23 @@
 		
 		<p:commandButton value="Dodaj" icon="pi pi-star" action="#{calcBB.calc()}" update="@form" />
 		<p:commandButton value="Dodaj (AJAX)" icon="pi pi-star" action="#{calcBB.calc_AJAX()}" update="msg" />
-			
+		
+		<p:commandButton value="Reset" immediate="true" ajax="false">
+		<p:resetInput target="grid" />
+		</p:commandButton>	
+		
 		</h:panelGrid>
 		<p:growl id="msg" showDetail="true" sticky="true" />
 		<h:commandLink value="Informacje" action="#{calcBB.info()}" />
 		<br />
 
 	</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+	<ui:composition template="/templates/footer-snippet.xhtml">
+	<p:panel>
+	Wykonano: Igor Ceglarz
 	</p:panel>
-</h:body>
+	</ui:composition>
 </html>
